@@ -1,6 +1,6 @@
-FROM debian:jessie-slim
+FROM debian:stretch-slim
 
-ARG KOEL_VERSION=3.5.4
+ARG KOEL_VERSION=3.6.2
 ARG NODE_VERSION=6.9.4
 
 EXPOSE 8000
@@ -9,12 +9,13 @@ WORKDIR /opt
 
 RUN apt-get update \
     && apt-get install -y \
+    ffmpeg \
     wget \
     unzip \
-    php5 \
-    php5-curl \
-    php5-mysql \
-    php5-pgsql \
+    php \
+    php-curl \
+    php-mysql \
+    php-pgsql \
     python \
     make \
     g++ \
@@ -24,6 +25,7 @@ RUN apt-get update \
     && apt-get clean autoclean \
     && apt-get autoremove -y \
     && rm -rf /var/lib/cache /var/lib/log
+
 
 ENV DOCKERIZE_VERSION v0.3.0
 RUN wget https://github.com/jwilder/dockerize/releases/download/$DOCKERIZE_VERSION/dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz \
