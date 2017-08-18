@@ -1,3 +1,5 @@
+https://travis-ci.org/menardorama/koel-docker#
+
 # koel-docker
 
 This project helps in creating a [docker image](https://hub.docker.com/r/nithyanatarajan/koel/) for [koel](https://github.com/phanan/koel) app. The main idea is to reduce the installation steps and easily launch the application so that we can start enjoying music as soon as possible :)
