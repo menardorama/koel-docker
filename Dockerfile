@@ -14,6 +14,9 @@ RUN apt-get update \
     unzip \
     php \
     php-curl \
+    php-zip \
+    php-dom \
+    php-mbstring \
     php-mysql \
     php-pgsql \
     python \
