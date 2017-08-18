@@ -1,0 +1,12 @@
+sudo: true
+dist: trusty
+
+jobs:
+  include:
+    - stage: build docker image
+      script:
+      - docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
+      - docker build -t docker-koel .
+      - docker images
+      - docker tag docker-koel $DOCKER_USERNAME/docker-koel
+      - docker push $DOCKER_USERNAME/docker-koel
