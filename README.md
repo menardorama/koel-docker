@@ -138,6 +138,15 @@ docker run -it \
 nithyanatarajan/koel
 ```
 
+### Using Doker swarm
+
+```
+ docker service create --name="koel"  --replicas 1 --publish 8001:8000 \
+ --mount type=bind,src=//mnt/Music,dst=/media \
+ --env DB_DATABASE=koel --env DB_USERNAME=koel --env DB_PASSWORD=koel --env DB_CONNECTION=pgsql --env DB_HOST=192.168.1.1 \
+ --env ADMIN_EMAIL=toto@gmail.com --env ADMIN_NAME=admin --env ADMIN_PASSWORD=admin \
+ menardorama/koel-docker
+```
 ### Using docker compose
 
 One way of avoiding running database (mysql/postgres) and the app seperately is to use docker-compose.
