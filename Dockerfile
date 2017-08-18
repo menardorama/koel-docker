@@ -1,6 +1,6 @@
 FROM debian:stretch-slim
 
-ARG KOEL_VERSION=3.6.2
+#ARG KOEL_VERSION=3.6.2
 ARG NODE_VERSION=6.9.4
 
 EXPOSE 8000
@@ -10,6 +10,7 @@ WORKDIR /opt
 RUN apt-get update \
     && apt-get install -y \
     ffmpeg \
+    git \
     wget \
     unzip \
     php \
@@ -50,16 +51,15 @@ RUN wget https://nodejs.org/dist/v$NODE_VERSION/node-v$NODE_VERSION-linux-x64.ta
 RUN npm install -g yarn \
    && ln -sf /opt/nodejs/bin/yarn /usr/bin/yarn
 
-RUN wget https://github.com/phanan/koel/archive/v$KOEL_VERSION.zip \
-    && unzip -o v$KOEL_VERSION.zip -d /opt \
-    && rm v$KOEL_VERSION.zip
+WORKDIR /opt
+RUN git clone https://github.com/phanan/koel.git
 
-WORKDIR /opt/koel-$KOEL_VERSION
+WORKDIR /opt/koel
 
 RUN composer install
 
 # skipping yarn install while launching the app
-RUN sed -i 's/yarn/#yarn/g' /opt/koel-$KOEL_VERSION/app/Console/Commands/Init.php \
+RUN sed -i 's/yarn/#yarn/g' /opt/koel/app/Console/Commands/Init.php \
     && yarn install \
     && npm prune --production
 
